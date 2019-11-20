@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Cliente</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/dueno.js}"></script>
+
+
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/cliente/registrar}" method="post" th:object="${cliente}">
+			<div class="form-group">
+				<label for="id">ID:</label> <input type="text" id="id" aria-describedby="id" readonly="readonly"
+					class="form-control" th:field="*{id}"></input>
+
+				<div class="form-group">
+					<label for="nombre">NOMBRE:</label> <input type="text" placeholder="type here ..." 
+						th:field="*{nombre}" class="form-control" id="nombre"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+						
+							<div class="form-group">
+						<label for="apellido">Apellido</label> <input type="text"
+							class="form-control" id="apellido" aria-describedby="apellido"
+							th:field="*{apellido}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="edad">Edad</label> <input type="text"
+							class="form-control" id="edad" aria-describedby="edad"
+							th:field="*{edad}" placeholder="type here ..." />
+					</div>
+					
+					<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option selected>Choose...</option>
+   <option th:field="*{sexo}" value="Hombre">Hombre</option>
+						<option th:field="*{sexo}" value="Mujer">Mujer</option>
+  </select>
+</div>
+					
+					
+					<div class="form-group">
+						<label for="dni">Dni</label> <input type="text"
+							class="form-control" id="dni" aria-describedby="dni"
+							th:field="*{dni}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="correo">Correo</label> <input type="text"
+							class="form-control" id="correo" aria-describedby="correo"
+							th:field="*{correo}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="direccion">Direccion</label> <input type="text"
+							class="form-control" id="direccion" aria-describedby="direccion"
+							th:field="*{direccion}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="telefono">Telefono</label> <input type="text"
+							class="form-control" id="telefono" aria-describedby="telefono"
+							th:field="*{telefono}" placeholder="type here ..." />
+					</div>
+						
+						<div class="form-group">
+						<label for="name">Nombre de usuario</label> <input type="text"
+							class="form-control" id="name" aria-describedby="name"
+							th:field="*{nombre_usuario}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="contra">Contra</label> <input type="text"
+							class="form-control" id="contra" aria-describedby="contra"
+							th:field="*{contra}" placeholder="type here ..." />
+					</div>
+						
+						<label for="n_compras">Compras:</label> <input type="text" id="n_compras" aria-describedby="n_compras" readonly="readonly"
+					class="form-control" th:field="*{n_compras}"></input>
+						
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/cliente/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

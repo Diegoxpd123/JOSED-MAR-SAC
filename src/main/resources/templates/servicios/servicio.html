@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Servicio</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body>
+	<!-- Los fragment se insertan ya sea con th:include o th:replace -->
+	<!-- th:include simplemente se inserta dentro del espacio asignado -->
+	<!-- th:replace remplaza todo el espacio asignado por el fragment correspondiente -->
+	<!-- sintaxis th:include/replace="rutafragment :: Nombre del fragment -->
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<!-- th:action toma la accion de un form que se ejecutara por medio de un boton-->
+		<!-- @{} Expresion de enlace -->
+		<!-- ${} Declaracion de Variable -->
+		<!-- th:object declara un objeto que sera usado por los *{} -->
+		<form th:action="@{/servicio/registrar}" method="post" th:object="${servicio}"
+		
+			enctype="multipart/form-data">
+			<div class="form-group">
+			<!-- *{} Setea la variable -->
+				<label for="id">ID:</label> <input type="text" readonly="readonly"
+					class="form-control" th:field="*{id}"></input>
+
+				<div class="form-group">
+				
+	
+					<label for="tipo" class=" col-sm-2 col-form-label">Cliente: </label> <select
+						class="form-control" th:field="*{cliente.id}">
+						<option th:each="p: ${listaClientes}" th:value="${p.id}"
+							th:text="${p.nombre}"
+							th:selected="(${p.id} == *{cliente.id})"></option>
+					</select>
+					
+					<label for="tipo" class=" col-sm-2 col-form-label">Administrador: </label> <select
+						class="form-control" th:field="*{administrador.id}">
+						<option th:each="p: ${listaAdministradores}" th:value="${p.id}"
+							th:text="${p.nombre}"
+							th:selected="(${p.id} == *{administrador.id})"></option>
+					</select>
+					
+
+					<div class="form-group">
+						<label for="fecha_entrega">Fecha de entrega:</label> <input type="text"
+							class="form-control" id="fecha_entrega" aria-describedby="fecha_entrega"
+							th:field="*{fecha_entrega}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="fecha_registro">Fecha de entrega:</label> <input type="text"
+							class="form-control" id="fecha_registro" aria-describedby="fecha_registro"
+							th:field="*{fecha_registro}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="fecha_devolucion">Fecha de entrega:</label> <input type="text"
+							class="form-control" id="fecha_devolucion" aria-describedby="fecha_devolucion"
+							th:field="*{fecha_devolucion}" placeholder="type here ..." />
+					</div>
+					
+					<div class="form-group">
+						<label for="estado">Estado:</label> <input type="text"
+							class="form-control" id="estado" aria-describedby="estado" readonly="readonly"
+							th:field="*{estado}" placeholder="type here ..." />
+					</div>
+
+				</div>
+
+			</div>
+
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/servicio/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
